@@ -1,0 +1,61 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: rbac-platform
+  datasource:
+    # 本机 MySQL 使用 3306 端口；数据库需先执行 db/schema.sql 与 db/data.sql
+    url: jdbc:mysql://${RBAC_DB_HOST:localhost}:${RBAC_DB_PORT:3306}/${RBAC_DB_NAME:rbac_platform}?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${RBAC_DB_USER:root}
+    password: ${RBAC_DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+  jackson:
+    time-zone: UTC
+    default-property-inclusion: always
+  web:
+    resources:
+      add-mappings: false
+
+mybatis:
+  type-aliases-package: com.rbac.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    jdbc-type-for-null: NULL
+
+logging:
+  level:
+    com.rbac: INFO
+
+rbac:
+  business-mode: ${RBAC_BUSINESS_MODE:DISABLED}
+  course-datasource-id: ${RBAC_COURSE_DATASOURCE_ID:}
+  # ===== 服务实现切换开关：struct=结构化 / oop=面向对象 =====
+  service:
+    impl: ${RBAC_SERVICE_MODE:struct}
+  security:
+    session-absolute-minutes: 120      # 会话绝对有效期 2h
+    session-idle-minutes: 30           # 空闲超时 30min
+    login-lock-threshold: 5            # 连续错误 5 次锁定
+    login-lock-minutes: 15             # 锁定 15 分钟
+    ip-rate-limit-per-minute: 20       # 登录 IP 限流 20 次/分钟
+    phone-aes-key: ${RBAC_PHONE_KEY}  # 从环境提供32字节Base64密钥，不进入仓库
+    phone-key-version: 1
+    cors-allowed-origins: ${RBAC_CORS_ORIGINS:http://localhost:5173,http://127.0.0.1:5173,http://localhost:8081}
+  bootstrap:
+    # 首次安装 bootstrap 管理员工号与安装密码（仅空库时创建；生产由部署配置交付，不入库不入文档）
+    username: ${RBAC_BOOTSTRAP_USERNAME:ADMIN}
+    password: ${RBAC_BOOTSTRAP_PASSWORD:Admin@2026rbac}
+
+# ===== OpenAPI 契约自动生成（代码即文档）=====
+# 本地/服务器联调: http://<host>:8080/v3/api-docs  与  http://<host>:8080/swagger-ui/index.html
+# Apifox 可通过 URL 导入 /v3/api-docs 并定时同步
+springdoc:
+  api-docs:
+    enabled: ${RBAC_API_DOCS_ENABLED:true}   # 生产部署设 false 关闭契约暴露
+  swagger-ui:
+    enabled: ${RBAC_API_DOCS_ENABLED:true}
+    path: /swagger-ui.html
+  paths-to-match: /api/v1/**                  # 只生成业务接口契约

@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/permissions?page=1&size=20&applicationId=&keyword=&status="
+method: GET
+queryParams:
+  - key: page
+    value: "1"
+  - key: size
+    value: "20"
+  - key: applicationId
+    value: ""
+  - key: keyword
+    value: ""
+  - key: status
+    value: ""
+    description: 0/1
+order: 1000

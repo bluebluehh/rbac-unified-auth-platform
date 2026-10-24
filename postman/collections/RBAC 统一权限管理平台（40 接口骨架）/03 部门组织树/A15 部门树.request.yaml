@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/depts/tree?rootId=&includeDisabled=false"
+method: GET
+queryParams:
+  - key: rootId
+    value: ""
+    description: 可选
+  - key: includeDisabled
+    value: "false"
+order: 1000

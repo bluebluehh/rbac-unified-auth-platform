@@ -1,0 +1,1305 @@
+{
+  "ruleVersion": "DEPTJOB-20261024-V3.3",
+  "applicationKeys": [
+    "oa",
+    "hr",
+    "finance",
+    "engineering",
+    "tender",
+    "material",
+    "archive",
+    "gis",
+    "inspection",
+    "collaboration",
+    "knowledge",
+    "vehicle",
+    "video",
+    "publicity"
+  ],
+  "permissions": [
+    {
+      "permKey": "oa:m01:f001:approve",
+      "moduleName": "公文管理",
+      "resourceName": "收文登记",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "oa:m01:f001:export",
+      "moduleName": "公文管理",
+      "resourceName": "收文登记",
+      "actionName": "导出"
+    },
+    {
+      "permKey": "oa:m01:f001:view",
+      "moduleName": "公文管理",
+      "resourceName": "收文登记",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "oa:m01:f001:register",
+      "moduleName": "公文管理",
+      "resourceName": "收文登记",
+      "actionName": "登记"
+    },
+    {
+      "permKey": "oa:m01:f001:forward",
+      "moduleName": "公文管理",
+      "resourceName": "收文登记",
+      "actionName": "转发"
+    },
+    {
+      "permKey": "oa:m01:f002:approve",
+      "moduleName": "公文管理",
+      "resourceName": "发文拟稿",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "oa:m01:f002:export",
+      "moduleName": "公文管理",
+      "resourceName": "发文拟稿",
+      "actionName": "导出"
+    },
+    {
+      "permKey": "oa:m01:f002:draft",
+      "moduleName": "公文管理",
+      "resourceName": "发文拟稿",
+      "actionName": "拟稿"
+    },
+    {
+      "permKey": "oa:m01:f002:view",
+      "moduleName": "公文管理",
+      "resourceName": "发文拟稿",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "oa:m01:f002:edit",
+      "moduleName": "公文管理",
+      "resourceName": "发文拟稿",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "oa:m01:f003:approve",
+      "moduleName": "公文管理",
+      "resourceName": "公文审批",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "oa:m01:f003:view",
+      "moduleName": "公文管理",
+      "resourceName": "公文审批",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "oa:m01:f004:archive",
+      "moduleName": "公文管理",
+      "resourceName": "公文归档",
+      "actionName": "归档"
+    },
+    {
+      "permKey": "oa:m01:f004:view",
+      "moduleName": "公文管理",
+      "resourceName": "公文归档",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "oa:m02:f005:approve",
+      "moduleName": "审批流程",
+      "resourceName": "请假申请",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "oa:m02:f005:create",
+      "moduleName": "审批流程",
+      "resourceName": "请假申请",
+      "actionName": "新增"
+    },
+    {
+      "permKey": "oa:m02:f005:view",
+      "moduleName": "审批流程",
+      "resourceName": "请假申请",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "oa:m02:f006:approve",
+      "moduleName": "审批流程",
+      "resourceName": "费用报销",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "oa:m02:f006:export",
+      "moduleName": "审批流程",
+      "resourceName": "费用报销",
+      "actionName": "导出"
+    },
+    {
+      "permKey": "oa:m02:f006:create",
+      "moduleName": "审批流程",
+      "resourceName": "费用报销",
+      "actionName": "新增"
+    },
+    {
+      "permKey": "oa:m02:f006:view",
+      "moduleName": "审批流程",
+      "resourceName": "费用报销",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "oa:m02:f007:approve",
+      "moduleName": "审批流程",
+      "resourceName": "用章申请",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "oa:m02:f007:create",
+      "moduleName": "审批流程",
+      "resourceName": "用章申请",
+      "actionName": "新增"
+    },
+    {
+      "permKey": "oa:m02:f007:view",
+      "moduleName": "审批流程",
+      "resourceName": "用章申请",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "oa:m02:f008:approve",
+      "moduleName": "审批流程",
+      "resourceName": "合同审批",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "oa:m02:f008:create",
+      "moduleName": "审批流程",
+      "resourceName": "合同审批",
+      "actionName": "新增"
+    },
+    {
+      "permKey": "oa:m02:f008:view",
+      "moduleName": "审批流程",
+      "resourceName": "合同审批",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "oa:m03:f009:approve",
+      "moduleName": "会议管理",
+      "resourceName": "会议通知",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "oa:m03:f009:view",
+      "moduleName": "会议管理",
+      "resourceName": "会议通知",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "oa:m03:f009:organize",
+      "moduleName": "会议管理",
+      "resourceName": "会议通知",
+      "actionName": "组织"
+    },
+    {
+      "permKey": "oa:m03:f010:view",
+      "moduleName": "会议管理",
+      "resourceName": "会议纪要",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "oa:m03:f010:edit",
+      "moduleName": "会议管理",
+      "resourceName": "会议纪要",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "oa:m04:f011:publish",
+      "moduleName": "公告通知",
+      "resourceName": "公司公告",
+      "actionName": "发布"
+    },
+    {
+      "permKey": "oa:m04:f011:view",
+      "moduleName": "公告通知",
+      "resourceName": "公司公告",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "oa:m04:f012:publish",
+      "moduleName": "公告通知",
+      "resourceName": "部门通知",
+      "actionName": "发布"
+    },
+    {
+      "permKey": "oa:m04:f012:view",
+      "moduleName": "公告通知",
+      "resourceName": "部门通知",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "hr:m01:f001:view",
+      "moduleName": "组织管理",
+      "resourceName": "组织架构维护",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "hr:m02:f002:view",
+      "moduleName": "人员管理",
+      "resourceName": "员工档案",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "hr:m02:f002:edit",
+      "moduleName": "人员管理",
+      "resourceName": "员工档案",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "hr:m02:f003:view",
+      "moduleName": "人员管理",
+      "resourceName": "合同管理",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "hr:m02:f003:edit",
+      "moduleName": "人员管理",
+      "resourceName": "合同管理",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "hr:m03:f004:export",
+      "moduleName": "考勤管理",
+      "resourceName": "打卡记录",
+      "actionName": "导出"
+    },
+    {
+      "permKey": "hr:m03:f004:view",
+      "moduleName": "考勤管理",
+      "resourceName": "打卡记录",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "hr:m03:f005:approve",
+      "moduleName": "考勤管理",
+      "resourceName": "请假销假",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "hr:m03:f005:create",
+      "moduleName": "考勤管理",
+      "resourceName": "请假销假",
+      "actionName": "新增"
+    },
+    {
+      "permKey": "hr:m03:f005:view",
+      "moduleName": "考勤管理",
+      "resourceName": "请假销假",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "hr:m04:f006:export",
+      "moduleName": "薪酬绩效",
+      "resourceName": "工资核算",
+      "actionName": "导出"
+    },
+    {
+      "permKey": "hr:m04:f006:view",
+      "moduleName": "薪酬绩效",
+      "resourceName": "工资核算",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "hr:m04:f007:approve",
+      "moduleName": "薪酬绩效",
+      "resourceName": "绩效考核",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "hr:m04:f007:score",
+      "moduleName": "薪酬绩效",
+      "resourceName": "绩效考核",
+      "actionName": "打分"
+    },
+    {
+      "permKey": "hr:m04:f007:view",
+      "moduleName": "薪酬绩效",
+      "resourceName": "绩效考核",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "hr:m05:f008:approve",
+      "moduleName": "招聘培训",
+      "resourceName": "招聘需求",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "hr:m05:f008:create",
+      "moduleName": "招聘培训",
+      "resourceName": "招聘需求",
+      "actionName": "新增"
+    },
+    {
+      "permKey": "hr:m05:f008:view",
+      "moduleName": "招聘培训",
+      "resourceName": "招聘需求",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "hr:m05:f009:enroll",
+      "moduleName": "招聘培训",
+      "resourceName": "培训管理",
+      "actionName": "报名"
+    },
+    {
+      "permKey": "hr:m05:f009:view",
+      "moduleName": "招聘培训",
+      "resourceName": "培训管理",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "hr:m05:f009:edit",
+      "moduleName": "招聘培训",
+      "resourceName": "培训管理",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "finance:m01:f001:approve",
+      "moduleName": "预算管理",
+      "resourceName": "预算编制",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "finance:m01:f001:create",
+      "moduleName": "预算管理",
+      "resourceName": "预算编制",
+      "actionName": "新增"
+    },
+    {
+      "permKey": "finance:m01:f001:view",
+      "moduleName": "预算管理",
+      "resourceName": "预算编制",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "finance:m01:f001:edit",
+      "moduleName": "预算管理",
+      "resourceName": "预算编制",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "finance:m01:f002:export",
+      "moduleName": "预算管理",
+      "resourceName": "预算执行",
+      "actionName": "导出"
+    },
+    {
+      "permKey": "finance:m01:f002:view",
+      "moduleName": "预算管理",
+      "resourceName": "预算执行",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "finance:m02:f003:review",
+      "moduleName": "账务处理",
+      "resourceName": "凭证录入",
+      "actionName": "审核"
+    },
+    {
+      "permKey": "finance:m02:f003:view",
+      "moduleName": "账务处理",
+      "resourceName": "凭证录入",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "finance:m02:f003:edit",
+      "moduleName": "账务处理",
+      "resourceName": "凭证录入",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "finance:m02:f004:export",
+      "moduleName": "账务处理",
+      "resourceName": "财务报表",
+      "actionName": "导出"
+    },
+    {
+      "permKey": "finance:m02:f004:view",
+      "moduleName": "账务处理",
+      "resourceName": "财务报表",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "finance:m03:f005:approve",
+      "moduleName": "资金管理",
+      "resourceName": "付款申请",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "finance:m03:f005:create",
+      "moduleName": "资金管理",
+      "resourceName": "付款申请",
+      "actionName": "新增"
+    },
+    {
+      "permKey": "finance:m03:f005:view",
+      "moduleName": "资金管理",
+      "resourceName": "付款申请",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "finance:m03:f006:view",
+      "moduleName": "资金管理",
+      "resourceName": "银行对账",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "finance:m03:f006:edit",
+      "moduleName": "资金管理",
+      "resourceName": "银行对账",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "finance:m04:f007:view",
+      "moduleName": "固定资产",
+      "resourceName": "资产台账",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "finance:m04:f007:edit",
+      "moduleName": "固定资产",
+      "resourceName": "资产台账",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "finance:m05:f008:export",
+      "moduleName": "成本核算",
+      "resourceName": "项目成本",
+      "actionName": "导出"
+    },
+    {
+      "permKey": "finance:m05:f008:view",
+      "moduleName": "成本核算",
+      "resourceName": "项目成本",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "finance:m05:f008:edit",
+      "moduleName": "成本核算",
+      "resourceName": "项目成本",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "engineering:m01:f001:export",
+      "moduleName": "进度管理",
+      "resourceName": "进度计划",
+      "actionName": "导出"
+    },
+    {
+      "permKey": "engineering:m01:f001:view",
+      "moduleName": "进度管理",
+      "resourceName": "进度计划",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "engineering:m01:f001:edit",
+      "moduleName": "进度管理",
+      "resourceName": "进度计划",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "engineering:m01:f002:create",
+      "moduleName": "进度管理",
+      "resourceName": "进度填报",
+      "actionName": "新增"
+    },
+    {
+      "permKey": "engineering:m01:f002:view",
+      "moduleName": "进度管理",
+      "resourceName": "进度填报",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "engineering:m01:f002:edit",
+      "moduleName": "进度管理",
+      "resourceName": "进度填报",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "engineering:m01:f003:approve",
+      "moduleName": "进度管理",
+      "resourceName": "进度预警",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "engineering:m01:f003:view",
+      "moduleName": "进度管理",
+      "resourceName": "进度预警",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "engineering:m01:f003:edit",
+      "moduleName": "进度管理",
+      "resourceName": "进度预警",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "engineering:m02:f004:create",
+      "moduleName": "质量管理",
+      "resourceName": "质量检查",
+      "actionName": "新增"
+    },
+    {
+      "permKey": "engineering:m02:f004:view",
+      "moduleName": "质量管理",
+      "resourceName": "质量检查",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "engineering:m02:f004:edit",
+      "moduleName": "质量管理",
+      "resourceName": "质量检查",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "engineering:m02:f005:approve",
+      "moduleName": "质量管理",
+      "resourceName": "质量整改",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "engineering:m02:f005:create",
+      "moduleName": "质量管理",
+      "resourceName": "质量整改",
+      "actionName": "新增"
+    },
+    {
+      "permKey": "engineering:m02:f005:view",
+      "moduleName": "质量管理",
+      "resourceName": "质量整改",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "engineering:m02:f005:edit",
+      "moduleName": "质量管理",
+      "resourceName": "质量整改",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "engineering:m03:f006:create",
+      "moduleName": "安全管理",
+      "resourceName": "安全检查",
+      "actionName": "新增"
+    },
+    {
+      "permKey": "engineering:m03:f006:view",
+      "moduleName": "安全管理",
+      "resourceName": "安全检查",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "engineering:m03:f006:edit",
+      "moduleName": "安全管理",
+      "resourceName": "安全检查",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "engineering:m03:f007:approve",
+      "moduleName": "安全管理",
+      "resourceName": "事故上报",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "engineering:m03:f007:create",
+      "moduleName": "安全管理",
+      "resourceName": "事故上报",
+      "actionName": "新增"
+    },
+    {
+      "permKey": "engineering:m03:f007:view",
+      "moduleName": "安全管理",
+      "resourceName": "事故上报",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "engineering:m03:f007:edit",
+      "moduleName": "安全管理",
+      "resourceName": "事故上报",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "engineering:m04:f008:export",
+      "moduleName": "合同管理",
+      "resourceName": "合同台账",
+      "actionName": "导出"
+    },
+    {
+      "permKey": "engineering:m04:f008:view",
+      "moduleName": "合同管理",
+      "resourceName": "合同台账",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "engineering:m04:f008:edit",
+      "moduleName": "合同管理",
+      "resourceName": "合同台账",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "engineering:m04:f009:approve",
+      "moduleName": "合同管理",
+      "resourceName": "变更签证",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "engineering:m04:f009:view",
+      "moduleName": "合同管理",
+      "resourceName": "变更签证",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "engineering:m04:f009:edit",
+      "moduleName": "合同管理",
+      "resourceName": "变更签证",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "engineering:m05:f010:view",
+      "moduleName": "图纸管理",
+      "resourceName": "图纸版本",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "engineering:m05:f010:edit",
+      "moduleName": "图纸管理",
+      "resourceName": "图纸版本",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "engineering:m06:f011:create",
+      "moduleName": "竣工验收",
+      "resourceName": "竣工资料",
+      "actionName": "新增"
+    },
+    {
+      "permKey": "engineering:m06:f011:view",
+      "moduleName": "竣工验收",
+      "resourceName": "竣工资料",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "engineering:m06:f011:edit",
+      "moduleName": "竣工验收",
+      "resourceName": "竣工资料",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "tender:m01:f001:approve",
+      "moduleName": "招标管理",
+      "resourceName": "招标计划",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "tender:m01:f001:view",
+      "moduleName": "招标管理",
+      "resourceName": "招标计划",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "tender:m01:f001:edit",
+      "moduleName": "招标管理",
+      "resourceName": "招标计划",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "tender:m01:f002:approve",
+      "moduleName": "招标管理",
+      "resourceName": "招标文件",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "tender:m01:f002:view",
+      "moduleName": "招标管理",
+      "resourceName": "招标文件",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "tender:m01:f002:edit",
+      "moduleName": "招标管理",
+      "resourceName": "招标文件",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "tender:m02:f003:view",
+      "moduleName": "投标管理",
+      "resourceName": "投标报名",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "tender:m02:f003:edit",
+      "moduleName": "投标管理",
+      "resourceName": "投标报名",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "tender:m03:f004:view",
+      "moduleName": "评标管理",
+      "resourceName": "专家抽取",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "tender:m03:f004:edit",
+      "moduleName": "评标管理",
+      "resourceName": "专家抽取",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "tender:m03:f005:approve",
+      "moduleName": "评标管理",
+      "resourceName": "评标报告",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "tender:m03:f005:view",
+      "moduleName": "评标管理",
+      "resourceName": "评标报告",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "tender:m03:f005:edit",
+      "moduleName": "评标管理",
+      "resourceName": "评标报告",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "tender:m04:f006:view",
+      "moduleName": "中标管理",
+      "resourceName": "中标通知",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "tender:m04:f006:edit",
+      "moduleName": "中标管理",
+      "resourceName": "中标通知",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "material:m01:f001:approve",
+      "moduleName": "采购管理",
+      "resourceName": "采购申请",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "material:m01:f001:create",
+      "moduleName": "采购管理",
+      "resourceName": "采购申请",
+      "actionName": "新增"
+    },
+    {
+      "permKey": "material:m01:f001:view",
+      "moduleName": "采购管理",
+      "resourceName": "采购申请",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "material:m01:f002:view",
+      "moduleName": "采购管理",
+      "resourceName": "供应商库",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "material:m01:f002:edit",
+      "moduleName": "采购管理",
+      "resourceName": "供应商库",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "material:m02:f003:view",
+      "moduleName": "库存管理",
+      "resourceName": "入库出库",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "material:m02:f003:edit",
+      "moduleName": "库存管理",
+      "resourceName": "入库出库",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "material:m02:f004:export",
+      "moduleName": "库存管理",
+      "resourceName": "库存盘点",
+      "actionName": "导出"
+    },
+    {
+      "permKey": "material:m02:f004:view",
+      "moduleName": "库存管理",
+      "resourceName": "库存盘点",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "material:m02:f004:edit",
+      "moduleName": "库存管理",
+      "resourceName": "库存盘点",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "material:m03:f005:view",
+      "moduleName": "设备管理",
+      "resourceName": "设备台账",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "material:m03:f005:edit",
+      "moduleName": "设备管理",
+      "resourceName": "设备台账",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "material:m03:f006:create",
+      "moduleName": "设备管理",
+      "resourceName": "维保记录",
+      "actionName": "新增"
+    },
+    {
+      "permKey": "material:m03:f006:view",
+      "moduleName": "设备管理",
+      "resourceName": "维保记录",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "material:m03:f006:edit",
+      "moduleName": "设备管理",
+      "resourceName": "维保记录",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "archive:m01:f001:borrow",
+      "moduleName": "文书档案",
+      "resourceName": "公文归档",
+      "actionName": "借阅"
+    },
+    {
+      "permKey": "archive:m01:f001:archive",
+      "moduleName": "文书档案",
+      "resourceName": "公文归档",
+      "actionName": "归档"
+    },
+    {
+      "permKey": "archive:m01:f001:view",
+      "moduleName": "文书档案",
+      "resourceName": "公文归档",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "archive:m02:f002:archive",
+      "moduleName": "工程档案",
+      "resourceName": "竣工归档",
+      "actionName": "归档"
+    },
+    {
+      "permKey": "archive:m02:f002:view",
+      "moduleName": "工程档案",
+      "resourceName": "竣工归档",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "archive:m02:f002:edit",
+      "moduleName": "工程档案",
+      "resourceName": "竣工归档",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "archive:m03:f003:export",
+      "moduleName": "档案利用",
+      "resourceName": "档案检索",
+      "actionName": "导出"
+    },
+    {
+      "permKey": "archive:m03:f003:view",
+      "moduleName": "档案利用",
+      "resourceName": "档案检索",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "archive:m03:f004:approve",
+      "moduleName": "档案利用",
+      "resourceName": "借阅审批",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "archive:m03:f004:view",
+      "moduleName": "档案利用",
+      "resourceName": "借阅审批",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "archive:m03:f004:apply",
+      "moduleName": "档案利用",
+      "resourceName": "借阅审批",
+      "actionName": "申请"
+    },
+    {
+      "permKey": "gis:m01:f001:view",
+      "moduleName": "管线一张图",
+      "resourceName": "管网浏览",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "gis:m01:f002:export",
+      "moduleName": "管线一张图",
+      "resourceName": "查询统计",
+      "actionName": "导出"
+    },
+    {
+      "permKey": "gis:m01:f002:view",
+      "moduleName": "管线一张图",
+      "resourceName": "查询统计",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "gis:m02:f003:view",
+      "moduleName": "数据维护",
+      "resourceName": "管线录入",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "gis:m02:f003:edit",
+      "moduleName": "数据维护",
+      "resourceName": "管线录入",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "gis:m02:f004:view",
+      "moduleName": "数据维护",
+      "resourceName": "数据更新",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "gis:m02:f004:edit",
+      "moduleName": "数据维护",
+      "resourceName": "数据更新",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "gis:m03:f005:view",
+      "moduleName": "应急分析",
+      "resourceName": "碰撞分析",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "gis:m03:f005:edit",
+      "moduleName": "应急分析",
+      "resourceName": "碰撞分析",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "inspection:m01:f001:export",
+      "moduleName": "现场巡检",
+      "resourceName": "巡检打卡",
+      "actionName": "导出"
+    },
+    {
+      "permKey": "inspection:m01:f001:check_in",
+      "moduleName": "现场巡检",
+      "resourceName": "巡检打卡",
+      "actionName": "打卡"
+    },
+    {
+      "permKey": "inspection:m01:f001:view",
+      "moduleName": "现场巡检",
+      "resourceName": "巡检打卡",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "inspection:m01:f001:edit",
+      "moduleName": "现场巡检",
+      "resourceName": "巡检打卡",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "inspection:m01:f002:report",
+      "moduleName": "现场巡检",
+      "resourceName": "问题上报",
+      "actionName": "上报"
+    },
+    {
+      "permKey": "inspection:m01:f002:handle",
+      "moduleName": "现场巡检",
+      "resourceName": "问题上报",
+      "actionName": "处理"
+    },
+    {
+      "permKey": "inspection:m01:f002:approve",
+      "moduleName": "现场巡检",
+      "resourceName": "问题上报",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "inspection:m01:f002:view",
+      "moduleName": "现场巡检",
+      "resourceName": "问题上报",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "inspection:m02:f003:receive",
+      "moduleName": "任务管理",
+      "resourceName": "任务接收",
+      "actionName": "接收"
+    },
+    {
+      "permKey": "inspection:m02:f003:view",
+      "moduleName": "任务管理",
+      "resourceName": "任务接收",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "inspection:m02:f003:dispatch",
+      "moduleName": "任务管理",
+      "resourceName": "任务接收",
+      "actionName": "派发"
+    },
+    {
+      "permKey": "inspection:m02:f004:feedback",
+      "moduleName": "任务管理",
+      "resourceName": "整改反馈",
+      "actionName": "反馈"
+    },
+    {
+      "permKey": "inspection:m02:f004:view",
+      "moduleName": "任务管理",
+      "resourceName": "整改反馈",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "inspection:m02:f004:accept",
+      "moduleName": "任务管理",
+      "resourceName": "整改反馈",
+      "actionName": "验收"
+    },
+    {
+      "permKey": "collaboration:m01:f001:view",
+      "moduleName": "即时通讯",
+      "resourceName": "组织架构",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "collaboration:m01:f002:view",
+      "moduleName": "即时通讯",
+      "resourceName": "聊天群组",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "collaboration:m02:f003:host",
+      "moduleName": "视频会议",
+      "resourceName": "会议发起",
+      "actionName": "主持"
+    },
+    {
+      "permKey": "collaboration:m02:f003:initiate",
+      "moduleName": "视频会议",
+      "resourceName": "会议发起",
+      "actionName": "发起"
+    },
+    {
+      "permKey": "collaboration:m03:f004:push",
+      "moduleName": "公告推送",
+      "resourceName": "消息推送",
+      "actionName": "推送"
+    },
+    {
+      "permKey": "collaboration:m03:f004:view",
+      "moduleName": "公告推送",
+      "resourceName": "消息推送",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "knowledge:m01:f001:publish",
+      "moduleName": "制度文档",
+      "resourceName": "制度发布",
+      "actionName": "发布"
+    },
+    {
+      "permKey": "knowledge:m01:f001:view",
+      "moduleName": "制度文档",
+      "resourceName": "制度发布",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "knowledge:m01:f002:export",
+      "moduleName": "制度文档",
+      "resourceName": "文档检索",
+      "actionName": "导出"
+    },
+    {
+      "permKey": "knowledge:m01:f002:view",
+      "moduleName": "制度文档",
+      "resourceName": "文档检索",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "knowledge:m01:f002:search",
+      "moduleName": "制度文档",
+      "resourceName": "文档检索",
+      "actionName": "检索"
+    },
+    {
+      "permKey": "knowledge:m02:f003:learn",
+      "moduleName": "培训学习",
+      "resourceName": "在线学习",
+      "actionName": "学习"
+    },
+    {
+      "permKey": "knowledge:m02:f003:view",
+      "moduleName": "培训学习",
+      "resourceName": "在线学习",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "knowledge:m02:f004:take_exam",
+      "moduleName": "培训学习",
+      "resourceName": "考试测评",
+      "actionName": "参加考试"
+    },
+    {
+      "permKey": "knowledge:m02:f004:view",
+      "moduleName": "培训学习",
+      "resourceName": "考试测评",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "knowledge:m02:f004:grade",
+      "moduleName": "培训学习",
+      "resourceName": "考试测评",
+      "actionName": "阅卷"
+    },
+    {
+      "permKey": "vehicle:m01:f001:approve",
+      "moduleName": "车辆调度",
+      "resourceName": "用车申请",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "vehicle:m01:f001:view",
+      "moduleName": "车辆调度",
+      "resourceName": "用车申请",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "vehicle:m01:f001:apply",
+      "moduleName": "车辆调度",
+      "resourceName": "用车申请",
+      "actionName": "申请"
+    },
+    {
+      "permKey": "vehicle:m01:f002:view",
+      "moduleName": "车辆调度",
+      "resourceName": "派车管理",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "vehicle:m01:f002:edit",
+      "moduleName": "车辆调度",
+      "resourceName": "派车管理",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "vehicle:m02:f003:export",
+      "moduleName": "费用管理",
+      "resourceName": "油耗维修",
+      "actionName": "导出"
+    },
+    {
+      "permKey": "vehicle:m02:f003:view",
+      "moduleName": "费用管理",
+      "resourceName": "油耗维修",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "vehicle:m02:f003:edit",
+      "moduleName": "费用管理",
+      "resourceName": "油耗维修",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "video:m01:f001:view",
+      "moduleName": "实时监控",
+      "resourceName": "现场视频",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "video:m02:f002:export",
+      "moduleName": "录像回放",
+      "resourceName": "历史录像",
+      "actionName": "导出"
+    },
+    {
+      "permKey": "video:m02:f002:view",
+      "moduleName": "录像回放",
+      "resourceName": "历史录像",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "video:m03:f003:dispose",
+      "moduleName": "AI预警",
+      "resourceName": "违规识别",
+      "actionName": "处置"
+    },
+    {
+      "permKey": "video:m03:f003:view",
+      "moduleName": "AI预警",
+      "resourceName": "违规识别",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "video:m03:f003:statistics",
+      "moduleName": "AI预警",
+      "resourceName": "违规识别",
+      "actionName": "统计"
+    },
+    {
+      "permKey": "publicity:m01:f001:publish",
+      "moduleName": "新闻管理",
+      "resourceName": "新闻发布",
+      "actionName": "发布"
+    },
+    {
+      "permKey": "publicity:m01:f001:view",
+      "moduleName": "新闻管理",
+      "resourceName": "新闻发布",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "publicity:m01:f001:edit",
+      "moduleName": "新闻管理",
+      "resourceName": "新闻发布",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "publicity:m01:f002:approve",
+      "moduleName": "新闻管理",
+      "resourceName": "外宣审核",
+      "actionName": "审批"
+    },
+    {
+      "permKey": "publicity:m01:f002:view",
+      "moduleName": "新闻管理",
+      "resourceName": "外宣审核",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "publicity:m01:f002:edit",
+      "moduleName": "新闻管理",
+      "resourceName": "外宣审核",
+      "actionName": "编辑"
+    },
+    {
+      "permKey": "publicity:m02:f003:view",
+      "moduleName": "形象展示",
+      "resourceName": "项目展示",
+      "actionName": "查看"
+    },
+    {
+      "permKey": "publicity:m02:f003:edit",
+      "moduleName": "形象展示",
+      "resourceName": "项目展示",
+      "actionName": "编辑"
+    }
+  ]
+}

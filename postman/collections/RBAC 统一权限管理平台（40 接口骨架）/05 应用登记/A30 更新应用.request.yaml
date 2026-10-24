@@ -1,0 +1,24 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/applications/{{sampleAppId}}"
+method: PATCH
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: If-Match
+    value: "{{appVersion}}"
+    description: 自动引用 appVersion 集合变量
+body:
+  type: json
+  content: |-
+    {
+      "appName": "道路巡检系统（改）"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      const body = pm.response.json();
+      if (body.data && body.data.version) {
+          pm.collectionVariables.set('appVersion', body.data.version);
+      }
+    language: text/javascript
+order: 4000

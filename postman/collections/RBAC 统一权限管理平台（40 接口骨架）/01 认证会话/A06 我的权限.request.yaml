@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/auth/permissions?applicationId="
+method: GET
+queryParams:
+  - key: applicationId
+    value: ""
+    description: 可选：按应用过滤
+order: 6000

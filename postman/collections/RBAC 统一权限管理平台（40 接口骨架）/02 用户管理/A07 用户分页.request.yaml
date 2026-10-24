@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/users?page=1&size=20&keyword=&deptId=&status="
+method: GET
+queryParams:
+  - key: page
+    value: "1"
+  - key: size
+    value: "20"
+  - key: keyword
+    value: ""
+  - key: deptId
+    value: ""
+  - key: status
+    value: ""
+    description: ENABLED/DISABLED/PENDING_ACTIVATION
+order: 1000

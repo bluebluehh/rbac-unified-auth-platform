@@ -1,0 +1,479 @@
+{
+  "COMMON_EMPLOYEE": {
+    "departments": [
+      "公共权限"
+    ],
+    "grade": "通用权限",
+    "positions": []
+  },
+  "LEADERSHIP_SOURCE": {
+    "departments": [
+      "公司领导"
+    ],
+    "grade": "LEADER",
+    "positions": [
+      "董事长",
+      "总经理",
+      "副总经理",
+      "总工程师",
+      "总会计师",
+      "党委副书记",
+      "工会主席",
+      "总经理助理",
+      "董事会秘书",
+      "经理",
+      "副经理",
+      "安全总监",
+      "经理助理"
+    ]
+  },
+  "OFFICE_MANAGER_SOURCE": {
+    "departments": [
+      "综合办公室"
+    ],
+    "grade": "DEPT_MANAGER",
+    "positions": [
+      "主任",
+      "副主任"
+    ]
+  },
+  "OFFICE_STAFF_SOURCE": {
+    "departments": [
+      "综合办公室"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "干事",
+      "主管",
+      "专员"
+    ]
+  },
+  "PARTY_MANAGER_SOURCE": {
+    "departments": [
+      "党委工作部"
+    ],
+    "grade": "DEPT_MANAGER",
+    "positions": [
+      "部长",
+      "副部长"
+    ]
+  },
+  "PARTY_STAFF_SOURCE": {
+    "departments": [
+      "党委工作部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "主管",
+      "专员",
+      "干事"
+    ]
+  },
+  "HR_MANAGER_SOURCE": {
+    "departments": [
+      "人力资源部"
+    ],
+    "grade": "DEPT_MANAGER",
+    "positions": [
+      "部长",
+      "副部长"
+    ]
+  },
+  "HR_GENERAL_SOURCE": {
+    "departments": [
+      "人力资源部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "主管",
+      "专员"
+    ]
+  },
+  "HR_PAYROLL_SOURCE": {
+    "departments": [
+      "人力资源部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "薪酬专员"
+    ]
+  },
+  "HR_RECRUIT_SOURCE": {
+    "departments": [
+      "人力资源部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "招聘专员"
+    ]
+  },
+  "FIN_MANAGER_SOURCE": {
+    "departments": [
+      "财务部"
+    ],
+    "grade": "DEPT_MANAGER",
+    "positions": [
+      "部长",
+      "副部长"
+    ]
+  },
+  "FIN_CASHIER_SOURCE": {
+    "departments": [
+      "财务部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "出纳"
+    ]
+  },
+  "FIN_ACCOUNT_SOURCE": {
+    "departments": [
+      "财务部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "会计"
+    ]
+  },
+  "FIN_COST_SOURCE": {
+    "departments": [
+      "财务部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "成本核算员"
+    ]
+  },
+  "FIN_GENERAL_SOURCE": {
+    "departments": [
+      "财务部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "主管"
+    ]
+  },
+  "MARKET_MANAGER_SOURCE": {
+    "departments": [
+      "市场经营部"
+    ],
+    "grade": "DEPT_MANAGER",
+    "positions": [
+      "部长",
+      "副部长"
+    ]
+  },
+  "MARKET_TENDER_SOURCE": {
+    "departments": [
+      "市场经营部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "主管",
+      "招投标专员"
+    ]
+  },
+  "MARKET_CONTRACT_SOURCE": {
+    "departments": [
+      "市场经营部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "合约专员"
+    ]
+  },
+  "MARKET_COST_SOURCE": {
+    "departments": [
+      "市场经营部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "造价工程师",
+      "造价专员"
+    ]
+  },
+  "ENGINEERING_MANAGER_SOURCE": {
+    "departments": [
+      "工程技术部"
+    ],
+    "grade": "DEPT_MANAGER",
+    "positions": [
+      "部长",
+      "副部长"
+    ]
+  },
+  "GIS_MANAGER_SOURCE": {
+    "departments": [
+      "工程技术部"
+    ],
+    "grade": "DEPT_MANAGER",
+    "positions": [
+      "部长",
+      "副部长"
+    ]
+  },
+  "ENGINEERING_STAFF_SOURCE": {
+    "departments": [
+      "工程技术部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "工程师",
+      "主任工程师",
+      "主管",
+      "技术员"
+    ]
+  },
+  "GIS_STAFF_SOURCE": {
+    "departments": [
+      "工程技术部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "工程师",
+      "主任工程师",
+      "主管",
+      "技术员"
+    ]
+  },
+  "SAFETY_MANAGER_SOURCE": {
+    "departments": [
+      "安全质量部"
+    ],
+    "grade": "DEPT_MANAGER",
+    "positions": [
+      "部长",
+      "副部长"
+    ]
+  },
+  "SAFETY_GENERAL_SOURCE": {
+    "departments": [
+      "安全质量部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "主管"
+    ]
+  },
+  "SAFETY_FIELD_SOURCE": {
+    "departments": [
+      "安全质量部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "安全工程师",
+      "安全员"
+    ]
+  },
+  "QUALITY_FIELD_SOURCE": {
+    "departments": [
+      "安全质量部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "质量工程师"
+    ]
+  },
+  "MATERIAL_MANAGER_SOURCE": {
+    "departments": [
+      "物资设备部"
+    ],
+    "grade": "DEPT_MANAGER",
+    "positions": [
+      "部长",
+      "副部长"
+    ]
+  },
+  "EQUIPMENT_SOURCE": {
+    "departments": [
+      "物资设备部",
+      "第一项目经理部",
+      "第二项目经理部",
+      "第三项目经理部",
+      "第四项目经理部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "设备管理员",
+      "机械管理员"
+    ]
+  },
+  "PURCHASE_SOURCE": {
+    "departments": [
+      "物资设备部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "采购员"
+    ]
+  },
+  "MATERIAL_STOCK_SOURCE": {
+    "departments": [
+      "物资设备部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "材料工程师"
+    ]
+  },
+  "MATERIAL_GENERAL_SOURCE": {
+    "departments": [
+      "物资设备部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "主管"
+    ]
+  },
+  "AUDIT_MANAGER_SOURCE": {
+    "departments": [
+      "审计监察部"
+    ],
+    "grade": "DEPT_MANAGER",
+    "positions": [
+      "部长",
+      "副部长"
+    ]
+  },
+  "AUDIT_STAFF_SOURCE": {
+    "departments": [
+      "审计监察部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "监察专员",
+      "审计专员"
+    ]
+  },
+  "UNION_MANAGER_SOURCE": {
+    "departments": [
+      "工会办公室"
+    ],
+    "grade": "DEPT_MANAGER",
+    "positions": [
+      "主任",
+      "副主任"
+    ]
+  },
+  "UNION_STAFF_SOURCE": {
+    "departments": [
+      "工会办公室"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "工会干事",
+      "文体专员"
+    ]
+  },
+  "PROJECT_MANAGER_SOURCE": {
+    "departments": [
+      "项目经理部"
+    ],
+    "grade": "PROJECT_MANAGER",
+    "positions": [
+      "项目经理",
+      "项目副经理",
+      "项目总工程师"
+    ]
+  },
+  "PROJECT_QUALITY_SOURCE": {
+    "departments": [
+      "项目经理部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "质检员",
+      "试验员"
+    ]
+  },
+  "PROJECT_TECH_SOURCE": {
+    "departments": [
+      "项目经理部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "施工员",
+      "技术员",
+      "测量员"
+    ]
+  },
+  "PROJECT_ARCHIVE_SOURCE": {
+    "departments": [
+      "项目经理部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "资料员"
+    ]
+  },
+  "PROJECT_COST_SOURCE": {
+    "departments": [
+      "项目经理部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "预算员",
+      "造价员"
+    ]
+  },
+  "PROJECT_MATERIAL_SOURCE": {
+    "departments": [
+      "项目经理部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "材料员"
+    ]
+  },
+  "PROJECT_SAFETY_SOURCE": {
+    "departments": [
+      "项目经理部"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": [
+      "安全员"
+    ]
+  },
+  "PLATFORM_ADMIN": {
+    "departments": [
+      "平台管理"
+    ],
+    "grade": "PLATFORM",
+    "positions": []
+  },
+  "SYS_ADMIN": {
+    "departments": [
+      "源表通用角色"
+    ],
+    "grade": "系统管理员",
+    "positions": []
+  },
+  "COMPANY_LEADER": {
+    "departments": [
+      "源表通用角色"
+    ],
+    "grade": "LEADER",
+    "positions": []
+  },
+  "DEPT_MANAGER": {
+    "departments": [
+      "源表通用角色"
+    ],
+    "grade": "DEPT_MANAGER",
+    "positions": []
+  },
+  "PROJECT_MANAGER": {
+    "departments": [
+      "源表通用角色"
+    ],
+    "grade": "PROJECT_MANAGER",
+    "positions": []
+  },
+  "EMPLOYEE": {
+    "departments": [
+      "源表通用角色"
+    ],
+    "grade": "EMPLOYEE",
+    "positions": []
+  }
+}

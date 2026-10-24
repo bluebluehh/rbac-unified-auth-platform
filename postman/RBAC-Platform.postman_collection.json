@@ -1,0 +1,658 @@
+{
+  "info": {
+    "_postman_id": "b7e1c2d0-0000-4000-8000-000000000001",
+    "name": "RBAC 统一权限管理平台（40 接口骨架）",
+    "description": "对齐 api.md / 设计文档 §10 契约。\n\n使用步骤：\n1. 修改集合变量 baseUrl（默认 http://localhost:8080）。\n2. 执行「01 认证会话 / A01 登录」，测试脚本自动把 token 存入集合变量 accessToken。\n3. 其余接口统一使用 Bearer {{accessToken}}；写接口的 If-Match 需按读接口返回的 ETag 修改。\n4. struct 骨架下：读路径与登录链路真实可用，写路径返回 501 属预期。",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "accessToken", "value": "" },
+    { "key": "userId", "value": "" },
+    { "key": "sampleUserId", "value": "1" },
+    { "key": "sampleDeptId", "value": "1" },
+    { "key": "sampleRoleId", "value": "1" },
+    { "key": "sampleAppId", "value": "1" },
+    { "key": "samplePermissionId", "value": "1" },
+    { "key": "sampleLogId", "value": "1" },
+    { "key": "logFrom", "value": "2026-10-01T00:00:00+08:00" },
+    { "key": "logTo", "value": "2026-10-21T00:00:00+08:00" }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [ { "key": "token", "value": "{{accessToken}}", "type": "string" } ]
+  },
+  "item": [
+    {
+      "name": "01 认证会话",
+      "item": [
+        {
+          "name": "A01 登录",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "if (body.data && body.data.token) {",
+                  "    pm.collectionVariables.set('accessToken', body.data.token);",
+                  "    pm.collectionVariables.set('userId', body.data.userId);",
+                  "    console.log('已保存 accessToken，restricted=' + body.data.restricted);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"ADMIN0001\",\n  \"password\": \"ChangeMe_2026a\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/auth/login", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "auth", "login" ] },
+            "description": "按种子数据修改用户名/密码。锁定与限流返回 429。"
+          },
+          "response": []
+        },
+        {
+          "name": "A02 退出",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/auth/logout", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "auth", "logout" ] },
+            "description": "幂等：无 Token / 旧 Token 重复退出均 200。"
+          },
+          "response": []
+        },
+        {
+          "name": "A03 我的信息",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/auth/me", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "auth", "me" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A04 首次改密",
+          "request": {
+            "method": "PUT",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"ChangeMe_2026a\",\n  \"newPassword\": \"NewPass_2026b\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/auth/password", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "auth", "password" ] },
+            "description": "受限会话可调用；成功后撤销全部会话，需重新登录。"
+          },
+          "response": []
+        },
+        {
+          "name": "A05 我的应用卡片",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/auth/apps", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "auth", "apps" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A06 我的权限",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/permissions?applicationId=",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "v1", "auth", "permissions" ],
+              "query": [ { "key": "applicationId", "value": "", "description": "可选：按应用过滤" } ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "02 用户管理",
+      "item": [
+        {
+          "name": "A07 用户分页",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users?page=1&size=20&keyword=&deptId=&status=",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "v1", "users" ],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "size", "value": "20" },
+                { "key": "keyword", "value": "" },
+                { "key": "deptId", "value": "" },
+                { "key": "status", "value": "", "description": "ENABLED/DISABLED/PENDING_ACTIVATION" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A08 用户详情",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/users/{{sampleUserId}}", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "users", "{{sampleUserId}}" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A09 创建用户",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"EMP20261021\",\n  \"realName\": \"张三\",\n  \"companyId\": \"1\",\n  \"deptId\": \"2\",\n  \"positionName\": \"巡检员\",\n  \"phone\": \"13800138000\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/users", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "users" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A10 更新用户",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "If-Match", "value": "\"0\"", "description": "改为 A08 返回的 ETag" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"realName\": \"张三丰\",\n  \"positionName\": \"高级巡检员\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/users/{{sampleUserId}}", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "users", "{{sampleUserId}}" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A11 用户启停",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "If-Match", "value": "\"0\"", "description": "改为 A08 返回的 ETag" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"DISABLED\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/users/{{sampleUserId}}/status", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "users", "{{sampleUserId}}", "status" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A12 重置临时密码",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "If-Match", "value": "\"0\"", "description": "改为 A08 返回的 ETag" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"temporaryPassword\": \"TempPass_2026c\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/users/{{sampleUserId}}/password-reset", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "users", "{{sampleUserId}}", "password-reset" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A13 查询用户角色",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/users/{{sampleUserId}}/roles", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "users", "{{sampleUserId}}", "roles" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A14 分配角色",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "If-Match", "value": "\"0\"", "description": "改为 A13 返回的用户 ETag" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roleIds\": [\"1\", \"2\"]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/users/{{sampleUserId}}/roles", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "users", "{{sampleUserId}}", "roles" ] }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "03 部门组织树",
+      "item": [
+        {
+          "name": "A15 部门树",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/depts/tree?rootId=&includeDisabled=false",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "v1", "depts", "tree" ],
+              "query": [
+                { "key": "rootId", "value": "", "description": "可选" },
+                { "key": "includeDisabled", "value": "false" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A16 部门详情",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/depts/{{sampleDeptId}}", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "depts", "{{sampleDeptId}}" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A17 创建部门",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deptName\": \"管网运维二班\",\n  \"nodeKey\": \"dept-pw-2b\",\n  \"parentId\": \"2\",\n  \"nodeType\": \"DEPARTMENT\",\n  \"managerUserId\": null,\n  \"status\": 1\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/depts", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "depts" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A18 更新部门",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "If-Match", "value": "\"0\"", "description": "改为 A16 返回的 ETag" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deptName\": \"管网运维一班（改）\",\n  \"managerUserId\": null\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/depts/{{sampleDeptId}}", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "depts", "{{sampleDeptId}}" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A19 部门启停",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "If-Match", "value": "\"0\"", "description": "改为 A16 返回的 ETag" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": 0\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/depts/{{sampleDeptId}}/status", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "depts", "{{sampleDeptId}}", "status" ] }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "04 角色管理",
+      "item": [
+        {
+          "name": "A20 角色分页",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/roles?page=1&size=20&keyword=&status=",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "v1", "roles" ],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "size", "value": "20" },
+                { "key": "keyword", "value": "" },
+                { "key": "status", "value": "", "description": "0/1" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A21 角色详情",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/roles/{{sampleRoleId}}", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "roles", "{{sampleRoleId}}" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A22 创建角色",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roleName\": \"巡检员\",\n  \"roleKey\": \"INSPECTOR\",\n  \"description\": \"一线巡检\",\n  \"status\": 1\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/roles", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "roles" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A23 更新角色",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "If-Match", "value": "\"0\"", "description": "改为 A21 返回的 ETag" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roleName\": \"巡检员（改）\",\n  \"description\": null\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/roles/{{sampleRoleId}}", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "roles", "{{sampleRoleId}}" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A24 角色启停",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "If-Match", "value": "\"0\"", "description": "改为 A21 返回的 ETag" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": 0\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/roles/{{sampleRoleId}}/status", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "roles", "{{sampleRoleId}}", "status" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A25 查询角色权限",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/roles/{{sampleRoleId}}/permissions", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "roles", "{{sampleRoleId}}", "permissions" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A26 权限全量替换",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "If-Match", "value": "\"0\"", "description": "改为 A25 返回的角色 ETag" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"permissionIds\": [\"1\", \"2\", \"3\"]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/roles/{{sampleRoleId}}/permissions", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "roles", "{{sampleRoleId}}", "permissions" ] }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "05 应用登记",
+      "item": [
+        {
+          "name": "A27 应用分页",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/applications?page=1&size=20&keyword=&status=",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "v1", "applications" ],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "size", "value": "20" },
+                { "key": "keyword", "value": "" },
+                { "key": "status", "value": "", "description": "0/1" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A28 应用详情",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/applications/{{sampleAppId}}", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "applications", "{{sampleAppId}}" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A29 创建应用",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appName\": \"道路巡检系统\",\n  \"appKey\": \"road_patrol\",\n  \"status\": 1\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/applications", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "applications" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A30 更新应用",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "If-Match", "value": "\"0\"", "description": "改为 A28 返回的 ETag" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appName\": \"道路巡检系统（改）\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/applications/{{sampleAppId}}", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "applications", "{{sampleAppId}}" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A31 应用启停",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "If-Match", "value": "\"0\"", "description": "改为 A28 返回的 ETag" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": 0\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/applications/{{sampleAppId}}/status", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "applications", "{{sampleAppId}}", "status" ] }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "06 权限点维护",
+      "item": [
+        {
+          "name": "A32 权限分页",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/permissions?page=1&size=20&applicationId=&keyword=&status=",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "v1", "permissions" ],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "size", "value": "20" },
+                { "key": "applicationId", "value": "" },
+                { "key": "keyword", "value": "" },
+                { "key": "status", "value": "", "description": "0/1" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A33 权限详情",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/permissions/{{samplePermissionId}}", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "permissions", "{{samplePermissionId}}" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A34 创建权限点",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"applicationId\": \"1\",\n  \"moduleKey\": \"account\",\n  \"moduleName\": \"账号管理\",\n  \"resourceKey\": \"view\",\n  \"resourceName\": \"账号查看\",\n  \"resourceDescription\": null,\n  \"actionCode\": \"view\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/permissions", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "permissions" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A35 权限启停",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "If-Match", "value": "\"0\"", "description": "改为 A33 返回的 ETag" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": 0\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/permissions/{{samplePermissionId}}/status", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "permissions", "{{samplePermissionId}}", "status" ] }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "07 操作日志",
+      "item": [
+        {
+          "name": "A36 日志分页",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/logs?from={{logFrom}}&to={{logTo}}&page=1&size=20&userId=&eventType=&result=&requestId=",
+              "host": [ "{{baseUrl}}" ],
+              "path": [ "api", "v1", "logs" ],
+              "query": [
+                { "key": "from", "value": "{{logFrom}}", "description": "必填 ISO-8601 含时区，跨度≤31日" },
+                { "key": "to", "value": "{{logTo}}", "description": "必填" },
+                { "key": "page", "value": "1" },
+                { "key": "size", "value": "20" },
+                { "key": "userId", "value": "" },
+                { "key": "eventType", "value": "" },
+                { "key": "result", "value": "", "description": "SUCCESS/FAILURE" },
+                { "key": "requestId", "value": "" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "A37 日志详情",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/logs/{{sampleLogId}}", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "logs", "{{sampleLogId}}" ] }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "08 固定权限演示",
+      "item": [
+        {
+          "name": "A38 演示项目列表",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/demo/projects", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "demo", "projects" ] }
+          },
+          "response": []
+        },
+        {
+          "name": "A39 演示提交",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": { "raw": "{{baseUrl}}/api/v1/demo/projects/submit", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "demo", "projects", "submit" ] }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "09 集中字典",
+      "item": [
+        {
+          "name": "A40 字典",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/meta/dictionaries", "host": [ "{{baseUrl}}" ], "path": [ "api", "v1", "meta", "dictionaries" ] }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

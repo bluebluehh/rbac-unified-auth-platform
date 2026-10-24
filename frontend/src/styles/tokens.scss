@@ -1,0 +1,55 @@
+/**
+ * 蓝灰色 · 商务简约设计令牌
+ * 全部视觉变量集中于此，页面不得散落硬编码颜色。
+ */
+:root {
+  /* 主色（蓝灰） */
+  --rbac-primary: #2e5b8c;
+  --rbac-primary-hover: #3a6fa8;
+  --rbac-primary-active: #244a73;
+  --rbac-primary-bg: #eef3f9;
+  --rbac-primary-bg-strong: #dde8f3;
+
+  /* 品牌/导航 */
+  --rbac-sidebar-bg: #243447;
+  --rbac-sidebar-hover: #2e4258;
+  --rbac-sidebar-active: #2e5b8c;
+  --rbac-sidebar-text: #aeb9c6;
+  --rbac-sidebar-text-active: #ffffff;
+
+  /* 背景与卡片 */
+  --rbac-page-bg: #f5f7fa;
+  --rbac-card-bg: #ffffff;
+  --rbac-mask: rgba(15, 26, 40, 0.5);
+
+  /* 文字层级 */
+  --rbac-text-primary: #1f2d3d;
+  --rbac-text-regular: #5a6b7c;
+  --rbac-text-secondary: #8a97a5;
+  --rbac-text-placeholder: #a5b0bc;
+
+  /* 边框 */
+  --rbac-border: #dce3ea;
+  --rbac-border-light: #e8edf2;
+
+  /* 语义色 */
+  --rbac-success: #4c9a6b;
+  --rbac-warning: #e6a23c;
+  --rbac-danger: #c0504d;
+  --rbac-info: #7a8b9a;
+
+  /* 布局尺寸 */
+  --rbac-sidebar-width: 232px;
+  --rbac-header-height: 56px;
+  --rbac-radius: 8px;
+  --rbac-radius-sm: 6px;
+
+  /* 阴影（弱阴影，商务克制） */
+  --rbac-shadow-card: 0 1px 3px rgba(31, 45, 61, 0.06);
+  --rbac-shadow-pop: 0 6px 18px rgba(31, 45, 61, 0.12);
+
+  /* 字体 */
+  --rbac-font-family:
+    'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif;
+}

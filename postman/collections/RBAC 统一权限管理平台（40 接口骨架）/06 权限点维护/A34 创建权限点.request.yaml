@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/permissions"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "applicationId": "1",
+      "moduleKey": "account",
+      "moduleName": "账号管理",
+      "resourceKey": "view",
+      "resourceName": "账号查看",
+      "resourceDescription": null,
+      "actionCode": "view"
+    }
+order: 3000

@@ -1,0 +1,24 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/permissions/{{samplePermissionId}}/status"
+method: PATCH
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: If-Match
+    value: "{{permVersion}}"
+    description: 自动引用 permVersion 集合变量
+body:
+  type: json
+  content: |-
+    {
+      "status": 0
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      const body = pm.response.json();
+      if (body.data && body.data.version) {
+          pm.collectionVariables.set('permVersion', body.data.version);
+      }
+    language: text/javascript
+order: 4000

@@ -1,0 +1,14 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/applications"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "appName": "道路巡检系统",
+      "appKey": "road_patrol",
+      "status": 1
+    }
+order: 3000

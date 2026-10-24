@@ -1,0 +1,24 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/logs?from={{logFrom}}&to={{logTo}}&page=1&size=20&userId=&eventType=&result=&requestId="
+method: GET
+queryParams:
+  - key: from
+    value: "{{logFrom}}"
+    description: 必填 ISO-8601 含时区，跨度≤31日
+  - key: to
+    value: "{{logTo}}"
+    description: 必填
+  - key: page
+    value: "1"
+  - key: size
+    value: "20"
+  - key: userId
+    value: ""
+  - key: eventType
+    value: ""
+  - key: result
+    value: ""
+    description: SUCCESS/FAILURE
+  - key: requestId
+    value: ""
+order: 1000

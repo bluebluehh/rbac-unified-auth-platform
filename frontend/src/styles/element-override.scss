@@ -1,0 +1,48 @@
+/**
+ * Element Plus 主题对齐：通过官方 CSS 变量将默认蓝改为本项目蓝灰主色。
+ * 仅覆盖变量，不做组件结构改写。
+ */
+:root {
+  --el-color-primary: var(--rbac-primary);
+  --el-color-primary-light-3: #5b81aa;
+  --el-color-primary-light-5: #87a3c0;
+  --el-color-primary-light-7: #b3c5d8;
+  --el-color-primary-light-8: #ccd9e6;
+  --el-color-primary-light-9: #e6edf4;
+  --el-color-primary-dark-2: var(--rbac-primary-active);
+
+  --el-color-success: var(--rbac-success);
+  --el-color-warning: var(--rbac-warning);
+  --el-color-danger: var(--rbac-danger);
+  --el-color-error: var(--rbac-danger);
+  --el-color-info: var(--rbac-info);
+
+  --el-text-color-primary: var(--rbac-text-primary);
+  --el-text-color-regular: var(--rbac-text-regular);
+  --el-text-color-secondary: var(--rbac-text-secondary);
+  --el-text-color-placeholder: var(--rbac-text-placeholder);
+
+  --el-border-color: var(--rbac-border);
+  --el-border-color-light: var(--rbac-border-light);
+  --el-border-color-lighter: var(--rbac-border-light);
+
+  --el-border-radius-base: var(--rbac-radius-sm);
+
+  --el-bg-color-page: var(--rbac-page-bg);
+  --el-fill-color-blank: var(--rbac-card-bg);
+
+  --el-box-shadow-light: var(--rbac-shadow-pop);
+}
+
+/* 表头底色统一为浅蓝灰，突出商务感 */
+.el-table th.el-table__cell {
+  background-color: var(--rbac-primary-bg);
+  color: var(--rbac-text-primary);
+  font-weight: 600;
+}
+
+/* 按钮：主按钮不描边发光，保持克制 */
+.el-button--primary {
+  --el-button-hover-bg-color: var(--rbac-primary-hover);
+  --el-button-active-bg-color: var(--rbac-primary-active);
+}

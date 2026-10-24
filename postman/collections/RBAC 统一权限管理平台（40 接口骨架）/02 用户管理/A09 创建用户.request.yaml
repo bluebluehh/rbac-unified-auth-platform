@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/users"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "username": "EMP20261021",
+      "realName": "张三",
+      "companyId": "1",
+      "deptId": "2",
+      "positionName": "巡检员",
+      "phone": "13800138000"
+    }
+order: 3000

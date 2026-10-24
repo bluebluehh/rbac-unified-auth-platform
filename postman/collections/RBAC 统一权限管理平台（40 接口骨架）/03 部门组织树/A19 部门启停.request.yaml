@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/depts/{{sampleDeptId}}/status"
+method: PATCH
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: If-Match
+    value: "{{deptVersion}}"
+    description: 自动引用 deptVersion 集合变量
+body:
+  type: json
+  content: |-
+    {
+      "status": 0
+    }
+order: 5000

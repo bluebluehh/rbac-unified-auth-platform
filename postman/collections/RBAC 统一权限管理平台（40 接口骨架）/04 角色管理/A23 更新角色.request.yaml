@@ -1,0 +1,25 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/roles/{{sampleRoleId}}"
+method: PATCH
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: If-Match
+    value: "{{roleVersion}}"
+    description: 自动引用 roleVersion 集合变量
+body:
+  type: json
+  content: |-
+    {
+      "roleName": "巡检员（改）",
+      "description": null
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      const body = pm.response.json();
+      if (body.data && body.data.version) {
+          pm.collectionVariables.set('roleVersion', body.data.version);
+      }
+    language: text/javascript
+order: 4000

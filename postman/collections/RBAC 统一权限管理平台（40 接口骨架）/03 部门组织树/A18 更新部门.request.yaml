@@ -1,0 +1,25 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/depts/{{sampleDeptId}}"
+method: PATCH
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: If-Match
+    value: "{{deptVersion}}"
+    description: 自动引用 deptVersion 集合变量
+body:
+  type: json
+  content: |-
+    {
+      "deptName": "管网运维一班（改）",
+      "managerUserId": null
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      const body = pm.response.json();
+      if (body.data && body.data.version) {
+          pm.collectionVariables.set('deptVersion', body.data.version);
+      }
+    language: text/javascript
+order: 4000

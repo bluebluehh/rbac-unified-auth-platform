@@ -1,0 +1,24 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/users/{{sampleUserId}}/password-reset"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: If-Match
+    value: "{{userVersion}}"
+    description: 自动引用 userVersion 集合变量
+body:
+  type: json
+  content: |-
+    {
+      "temporaryPassword": "TempPass_2026c"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      const body = pm.response.json();
+      if (body.data && body.data.version) {
+          pm.collectionVariables.set('userVersion', body.data.version);
+      }
+    language: text/javascript
+order: 6000

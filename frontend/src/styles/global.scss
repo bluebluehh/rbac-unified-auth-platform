@@ -1,0 +1,95 @@
+@use './tokens.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--rbac-font-family);
+  font-size: 14px;
+  color: var(--rbac-text-primary);
+  background-color: var(--rbac-page-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--rbac-primary);
+  text-decoration: none;
+}
+
+/* ---------- 通用页面结构 ---------- */
+
+.page {
+  padding: 20px 24px;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--rbac-text-primary);
+  margin: 0;
+}
+
+.page-subtitle {
+  font-size: 12px;
+  color: var(--rbac-text-secondary);
+  margin: 4px 0 0;
+}
+
+/* 工具条：筛选 + 操作按钮 */
+.toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.toolbar .spacer {
+  flex: 1;
+}
+
+/* 卡片容器 */
+.card {
+  background: var(--rbac-card-bg);
+  border: 1px solid var(--rbac-border-light);
+  border-radius: var(--rbac-radius);
+  box-shadow: var(--rbac-shadow-card);
+  padding: 20px;
+}
+
+/* 分页条 */
+.pagination-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+/* 文本工具 */
+.text-secondary {
+  color: var(--rbac-text-secondary);
+}
+
+.text-danger {
+  color: var(--rbac-danger);
+}
+
+/* 空状态/加载占位共用的最小高度 */
+.table-min-height {
+  min-height: 240px;
+}

@@ -1,0 +1,24 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/users/{{sampleUserId}}/status"
+method: PATCH
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: If-Match
+    value: "{{userVersion}}"
+    description: 自动引用 userVersion 集合变量
+body:
+  type: json
+  content: |-
+    {
+      "status": "DISABLED"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      const body = pm.response.json();
+      if (body.data && body.data.version) {
+          pm.collectionVariables.set('userVersion', body.data.version);
+      }
+    language: text/javascript
+order: 5000

@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/depts"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "deptName": "管网运维二班",
+      "nodeKey": "dept-pw-2b",
+      "parentId": "2",
+      "nodeType": "DEPARTMENT",
+      "managerUserId": null,
+      "status": 1
+    }
+order: 3000

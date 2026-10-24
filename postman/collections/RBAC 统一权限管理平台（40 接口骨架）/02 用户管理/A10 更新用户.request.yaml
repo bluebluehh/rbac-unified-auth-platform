@@ -1,0 +1,25 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/users/{{sampleUserId}}"
+method: PATCH
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: If-Match
+    value: "{{userVersion}}"
+    description: 自动引用 userVersion 集合变量
+body:
+  type: json
+  content: |-
+    {
+      "realName": "张三丰",
+      "positionName": "高级巡检员"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      const body = pm.response.json();
+      if (body.data && body.data.version) {
+          pm.collectionVariables.set('userVersion', body.data.version);
+      }
+    language: text/javascript
+order: 4000

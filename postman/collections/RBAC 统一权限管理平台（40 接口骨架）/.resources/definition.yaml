@@ -1,0 +1,39 @@
+$kind: collection
+description: |-
+  对齐 api.md / 设计文档 §10 契约。
+
+  使用步骤：
+
+  1. 修改集合变量 baseUrl（默认 [http://localhost:8080）。](http://localhost:8080）。)
+
+  2. 执行「01 认证会话 / A01 登录」，测试脚本自动把 token 存入集合变量 accessToken。
+
+  3. 其余接口统一使用 Bearer {{accessToken}}；写接口 If-Match 自动引用版本变量
+     （详情接口 A08/A13/A16/A21/A28/A33 的测试脚本会读取响应 version 存入
+     userVersion/deptVersion/roleVersion/appVersion/permVersion，写接口成功后自动回写新版本）。
+     手动单独测试某个写接口前，先执行一次对应详情接口刷新版本变量。
+
+  4. 写路径已全部实现真实业务；404/409/412 等为业务校验码，不是故障。
+variables:
+  baseUrl: http://localhost:8080
+  accessToken: ""
+  userId: ""
+  userVersion: "0"
+  deptVersion: "0"
+  roleVersion: "0"
+  appVersion: "0"
+  permVersion: "0"
+  sampleUserId: "1"
+  sampleDeptId: "1"
+  sampleRoleId: "1"
+  sampleAppId: "1"
+  samplePermissionId: "1"
+  sampleLogId: "1"
+  logFrom: 2026-09-30T16:00:00Z
+  logTo: 2026-10-20T16:00:00Z
+auth:
+  - id: 319bc80d-af03-45b0-8c6d-16b2e9393332
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{accessToken}}"
