@@ -2,6 +2,23 @@
 
 导入器通过现有40个API建立应用、权限、43个公共/职责角色，以及已确认的员工角色关系，不在登录时按岗位自动授权。
 
+## 推荐：完整包一次导入
+
+先按项目README启用course环境并启动后端。取得单独提供的员工完整导入包，解压后在项目根目录执行：
+
+```powershell
+node tools/course-import/import-all.mjs --source-root "C:\资料\员工完整导入包_20261025"
+node tools/course-import/import-all.mjs --source-root "C:\资料\员工完整导入包_20261025" --apply
+```
+
+包内已有校验后的载荷，不需要Python或手工填写员工。工具会核对载荷及原始资料摘要，再按现有API导入组织、应用、权限、43个职责角色、10,000名员工及20,046条员工角色关系。新基础库最终为49角色、10,001账号（含ADMIN）。只预览时不修改配置和员工；--apply会取得并校验本次预览确认值，不使用旧预览。
+
+只需要不含人员的配置：`node tools/course-import/initialize-catalog.mjs --apply`，读取仓库自带`db/course-catalog-v3.3.json`。这一步不会导入员工，可与完整包导入先后使用，已有相同授权会复用。
+
+两个入口均读取`.env.local`，支持进程环境覆盖。修改过管理员密码时指定`COURSE_ADMIN_PASSWORD`；其他本地后端端口通过`COURSE_API_BASE`指定。原始资料目录支持Windows和Linux路径分隔符。若已运行旧migration-002，会复用可明确匹配的应用和权限；未知或多义映射停止。
+
+导入中断后保留本机`.local/`日志，再用相同包重跑。不要删除日志后强行覆盖角色；已有人为撤权、改资料或改密码时以当前状态为准，冲突需核实。完整包与初始化目录使用独立日志目录，防止互相覆盖载荷。
+
 ## 本地资料
 
 原始三表、V3.3基线和员工计划不在仓库中。准备以下本地目录，勿上传员工文件：
@@ -24,7 +41,7 @@
 2. `python tools/course-import/prepare.py --source-root <source-root>`，校验源文件摘要、唯一工号、岗位组合及授权来源，生成私有`.local/course-import/payload.json`。
 3. 使用`COURSE_ADMIN_USERNAME`、`COURSE_ADMIN_PASSWORD`指定本地管理员，执行`node tools/course-import/import.mjs`，只预览，不改配置或员工。
 4. 备份数据库，确认无冲突后，设置`RBAC_BUSINESS_MODE=PERMISSION_DISPLAY_ONLY`，执行`node tools/course-import/import.mjs --apply --confirm=<预览中的confirmation>`。
-5. 初始化专项验证可执行`verify.mjs`，通过`COURSE_MYSQL`指定MySQL客户端路径、`RBAC_DB_PASSWORD`提供密码；此脚本预期新导入员工均待激活，已经人工激活后不能直接套用初始状态断言。
+5. 完整导入后可执行`node tools/course-import/verify.mjs`。它读取`.env.local`中的数据库主机、端口、库名、账号与密码，也可通过进程环境覆盖，`COURSE_MYSQL`可指定客户端路径。默认核对资料、角色、卡片与加密状态，保留已经人工激活的账号；刚导入的新库可添加`--initial-state`，额外要求全部源员工待激活且无密码。
 
 导入阶段通过环境变量`COURSE_SOURCE_ROOT`指定与prepare相同的资料目录；不设置时默认使用工程外层两级目录。换电脑或改变目录时应显式设置此变量，不需要修改代码。不要把源文件复制到前端或加入Git。
 

@@ -123,9 +123,9 @@ Authorization: Bearer <当前会话Token>
 
 仓库包含导入代码、非人员权限标签与角色分类，**不包含三张源Excel、10,000名员工资料、个人角色计划、手机号或数据库快照**。克隆后初始化的是基础库，不会自动恢复本机数据。
 
-完整课程导入另需本地提供原始三表及已确认的V3.3方案，见[导入说明](tools/course-import/README.md)。先校验和预览，再使用确认值显式应用；不在登录时按部门或岗位自动授权。
+**只有6个角色不是合并丢代码，而是只加载了基础种子。** `migration-002-business-permissions.sql`也不会创建43个职责角色或员工。现在提供独立的不含人员的初始化目录，以及完整员工资料包的导入入口，见[数据库说明](db/README.md)。
 
-已有课程角色的数据库需要在环境中设置：
+运行课程初始化前，先在`.env.local`配置并启动以下课程环境：
 
 ```dotenv
 SPRING_PROFILES_ACTIVE=course
@@ -134,6 +134,28 @@ RBAC_COURSE_DATASOURCE_ID=jdbc:mysql://127.0.0.1:3306/rbac_platform
 ```
 
 连接标识须与实际主机、端口、库名一致，不包含查询参数。课程配置拒绝生产profile。
+
+只补齐角色、应用和权限（不需要员工Excel）：
+
+```powershell
+node tools/course-import/initialize-catalog.mjs
+node tools/course-import/initialize-catalog.mjs --apply
+```
+
+新基础库将从6个角色变为49个角色，包含43个职责角色和651条角色权限关系，不会新增员工。
+
+**连同员工资料一次导入**：取得“员工完整导入包”并解压，在项目根目录执行：
+
+```powershell
+node tools/course-import/import-all.mjs --source-root "C:\资料\员工完整导入包_20261025"
+node tools/course-import/import-all.mjs --source-root "C:\资料\员工完整导入包_20261025" --apply
+```
+
+第一条只预览，第二条会校验当前数据库后显式应用。完整包一次导入111个源组织、10,000名员工、43个职责角色和20,046条员工角色关系，不必先单独导入目录。新员工无密码、待激活；已有密码、资料和人工授权不同会保留并提示冲突。不要重建已有数据库。含姓名手机号的资料包不提交Git，由组员在本机使用。
+
+导入入口会读取`.env.local`。管理员已改密时设置`COURSE_ADMIN_USERNAME`和`COURSE_ADMIN_PASSWORD`；端口不同设置`COURSE_API_BASE`。导入后生成与实际权限编码匹配的前端标签，静态前端应在此后重新构建。开发Vite会自动读取更新。
+
+完整过程、原始资料校验与高级导入见[导入说明](tools/course-import/README.md)。不在登录时按部门或岗位自动授权。
 
 ## 构建与验证
 

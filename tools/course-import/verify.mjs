@@ -3,14 +3,18 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { localEnvironment } from './run-prepared.mjs';
 
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-const dir = path.join(project, '.local/course-import');
+const env = localEnvironment();
+const dir = path.resolve(env.COURSE_IMPORT_DIR ?? path.join(project, '.local/course-import'));
 const input = JSON.parse(fs.readFileSync(path.join(dir, 'payload.json'), 'utf8'));
 const deployed = JSON.parse(fs.readFileSync(path.join(dir, 'deployment.json'), 'utf8'));
-const sql = statement => execFileSync(process.env.COURSE_MYSQL ?? 'C:/Program Files/MySQL/MySQL Server 8.4/bin/mysql.exe',
-  ['--host=127.0.0.1', '--port=3307', '--user=root', '--database=rbac_platform', '--default-character-set=utf8mb4', '--batch', '--raw', '--skip-column-names', '--execute=' + statement],
-  { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024, env: { ...process.env, MYSQL_PWD: process.env.RBAC_DB_PASSWORD ?? '' } })
+const windowsMysql = 'C:/Program Files/MySQL/MySQL Server 8.4/bin/mysql.exe';
+const mysql = env.COURSE_MYSQL ?? (process.platform === 'win32' && fs.existsSync(windowsMysql) ? windowsMysql : 'mysql');
+const sql = statement => execFileSync(mysql,
+  [`--host=${env.RBAC_DB_HOST ?? '127.0.0.1'}`, `--port=${env.RBAC_DB_PORT ?? '3306'}`, `--user=${env.RBAC_DB_USER ?? 'root'}`, `--database=${env.RBAC_DB_NAME ?? 'rbac_platform'}`, '--default-character-set=utf8mb4', '--batch', '--raw', '--skip-column-names', '--execute=' + statement],
+  { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024, env: { ...env, MYSQL_PWD: env.RBAC_DB_PASSWORD ?? '' } })
   .trim().split(/\r?\n/).filter(Boolean).map(JSON.parse);
 const equal = (a, b) => JSON.stringify([...new Set(a)].sort()) === JSON.stringify([...new Set(b)].sort());
 const actualRoles = sql("SELECT JSON_OBJECT('key',r.role_key,'permissions',COALESCE((SELECT JSON_ARRAYAGG(p.perm_key) FROM sys_role_permission rp JOIN sys_permission p ON p.id=rp.permission_id WHERE rp.role_id=r.id),JSON_ARRAY())) FROM sys_role r WHERE r.role_key='COMMON_EMPLOYEE' OR RIGHT(r.role_key,7)='_SOURCE'");
@@ -33,8 +37,10 @@ for (const source of input.users) {
   assert.equal(actual.positionName, source.positionName);
   assert.equal(actual.companyId, orgIds.get(source.companySourceName));
   assert.equal(actual.deptId, orgIds.get(source.deptSourceName));
-  assert.equal(actual.status, 'PENDING_ACTIVATION');
-  assert.equal(Boolean(actual.hasPassword), false);
+  if (process.argv.includes('--initial-state')) {
+    assert.equal(actual.status, 'PENDING_ACTIVATION');
+    assert.equal(Boolean(actual.hasPassword), false);
+  }
   assert.equal(Boolean(actual.phoneEncrypted), Boolean(source.phone));
   assert.ok(equal(actual.roles, source.roleKeys), `Employee roles differ: ${source.username}`);
   const roleDerivedKeys = [...new Set(actual.roles.flatMap(k => rolePermissions.get(k)))];
@@ -51,7 +57,8 @@ assert.ok(!/SG\d{6}|employeeSourceRow|phone|realName|roleKeys/.test(metadata));
 const report = { verifiedAt: new Date().toISOString(), ruleVersion: input.ruleVersion, roles: 43, rolePermissionPairs: 651,
   employees: 10000, employeeRolePairs: assignmentPairs, sourceOrganizationsMapped: deployed.organizations.length,
   allEmployeesMatchSourceProfiles: true, allEmployeesMatchPlannedRoles: true, allRoleDerivedCardsMatchPlan: true,
-  pendingActivationWithoutPasswords: 10000, phoneEncryptionPresent: true, frontendContainsOnlyPermissionMetadata: true,
+  pendingActivationWithoutPasswords: users.filter(u => u.status === 'PENDING_ACTIVATION' && !u.hasPassword).length,
+  phoneEncryptionPresent: true, frontendContainsOnlyPermissionMetadata: true,
   forbiddenAdminRolesAssigned: 0, deferredRowsNotPublished: 19, noGrantRowsNotPublished: 9, auditCounts: Object.fromEntries(logs) };
 fs.writeFileSync(path.join(dir, 'verification.json'), JSON.stringify(report, null, 2));
 console.log(JSON.stringify(report));

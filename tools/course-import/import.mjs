@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-const dir = path.join(project, '.local/course-import');
+const dir = path.resolve(process.env.COURSE_IMPORT_DIR ?? path.join(project, '.local/course-import'));
 const inputPath = path.join(dir, 'payload.json');
 const payloadBytes = fs.readFileSync(inputPath);
 const input = JSON.parse(payloadBytes);
@@ -14,10 +14,14 @@ const confirm = process.argv.find(a => a.startsWith('--confirm='))?.slice(10);
 const sourceRoot = path.resolve(process.env.COURSE_SOURCE_ROOT ?? path.resolve(project, '../..'));
 const base = process.env.COURSE_API_BASE ?? 'http://127.0.0.1:8080/api/v1';
 const endpoint = new URL(base);
-if (!['127.0.0.1', 'localhost'].includes(endpoint.hostname) || endpoint.port !== '8080' || endpoint.pathname !== '/api/v1') throw Error('Only the local course API on port 8080 is supported');
+if (!['http:', 'https:'].includes(endpoint.protocol) || !['127.0.0.1', 'localhost'].includes(endpoint.hostname)
+    || endpoint.pathname !== '/api/v1' || endpoint.username || endpoint.password || endpoint.search || endpoint.hash) throw Error('Only a local course API at /api/v1 is supported');
 if (input.environment !== 'COURSE_PERMISSION_DISPLAY_ONLY' || input.ruleVersion !== 'DEPTJOB-20261024-V3.3') throw Error('Unexpected course configuration');
 for (const source of input.manifests) {
-  if (hash(fs.readFileSync(path.resolve(sourceRoot, source.file))) !== source.sha256) throw Error(`Source changed since preparation: ${source.file}`);
+  const sourcePath = path.resolve(sourceRoot, source.file.replaceAll('\\', '/'));
+  const relativeSourcePath = path.relative(sourceRoot, sourcePath);
+  if (relativeSourcePath.startsWith('..') || path.isAbsolute(relativeSourcePath)) throw Error('Source manifest must stay inside COURSE_SOURCE_ROOT');
+  if (hash(fs.readFileSync(sourcePath)) !== source.sha256) throw Error(`Source changed since preparation: ${source.file}`);
 }
 const journalPath = path.join(dir, 'applied.ndjson');
 const events = fs.existsSync(journalPath) ? fs.readFileSync(journalPath, 'utf8').trim().split('\n').filter(Boolean).map(JSON.parse) : [];
@@ -36,7 +40,9 @@ async function api(method, route, body, version) {
   if (token) headers.Authorization = `Bearer ${token}`;
   if (version !== undefined) headers['If-Match'] = `"${version}"`;
   const response = await fetch(base + route, { method, headers, body: body === undefined ? undefined : JSON.stringify(body), signal: AbortSignal.timeout(60000) });
-  const result = await response.json();
+  let result;
+  try { result = await response.json(); }
+  catch { throw Error(`${method} ${route}: HTTP ${response.status} 未返回项目JSON响应，请核对COURSE_API_BASE及后端端口`); }
   if (!response.ok || result.code !== 'OK') throw Error(`${method} ${route}: HTTP ${response.status} ${result.code} ${result.message}`);
   return result.data;
 }
@@ -69,7 +75,9 @@ async function inspect() {
   for (const source of input.applications) {
     const exact = unique(applications.filter(a => a.appKey === source.appKey), `application ${source.appKey}`);
     const named = unique(applications.filter(a => a.appName === source.appName), `application name ${source.appName}`);
-    if (exact && named && exact.id !== named.id) throw Error(`Application key/name conflict: ${source.appKey}`);
+    // Migration 002 used project while engineering remained a separate demo app.
+    const legacyEngineeringDemo = source.appKey === 'engineering' && exact?.appName === '工程演示应用' && named?.appKey === 'project';
+    if (exact && named && exact.id !== named.id && !legacyEngineeringDemo) throw Error(`Application key/name conflict: ${source.appKey}`);
     const current = named ?? exact;
     if (current && current.appName !== source.appName && !(source.appKey === 'engineering' && current.appName === '工程演示应用')) throw Error(`Unexpected existing application: ${source.appKey}`);
     if (current && source.appKey !== 'source_admin' && current.status !== 1) conflicts.push(`Application disabled: ${source.appKey}`);
